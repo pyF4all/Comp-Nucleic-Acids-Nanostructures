@@ -1,0 +1,11 @@
+source oldff/leaprc.ff10
+source leaprc.water.tip3p
+loadamberparams frcmod.ionsjc_tip3p
+p = loadpdb dna_bending.pdb
+solvatebox p TIP3PBOX 20
+addions p Na+ 0
+#addions p Cl- 0
+#check p
+saveoff p au_dna_sheet.lib
+savepdb p au_dna_sheet.pdb
+saveamberparm p au_dna_sheet.prmtop au_dna_sheet.inpcrd

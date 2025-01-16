@@ -1,0 +1,8 @@
+source leaprc.DNA.OL15
+source leaprc.water.spce
+loadAmberParams frcmod.ionsjc_spce
+c= loadpdb dna_nanotube.pdb
+solvatebox c SPCBOX 15.0
+addions c Na+ 0
+saveamberparm c dnt.prmtop dnt.inpcrd
+#savepdb c two_rna.pdb

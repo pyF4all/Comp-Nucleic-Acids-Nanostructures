@@ -1,0 +1,12 @@
+source leaprc.RNA.OL3
+source leaprc.water.tip3p
+loadamberparams frcmod.ionsjc_tip3p
+p = loadpdb 6h3.pdb
+savemol2 p D2C_motif.mol2 1
+solvatebox p TIP3PBOX 20.0
+addions p Na+ 0
+#addions p Cl- 0
+#check p
+saveoff p D2C_motif.lib
+#savemol2 p D2C_motif.mol2 1
+saveamberparm p D2C_motif.prmtop D2C_motif.inpcrd

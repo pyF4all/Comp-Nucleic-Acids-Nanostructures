@@ -1,0 +1,1180 @@
+#define rise 3.38
+#define twist 34.28
+molecule m,m1,m_final,m_temp;
+int i,j,k,t;
+float trise,ttwist;
+matrix mat_x,mat_drz;
+string n,s;
+float re_arr,disp;
+
+re_arr=0.0;
+disp=20.00;
+
+
+m_final=newmolecule();
+addstrand (m_final,"S");
+addstrand (m_final,"B");
+addstrand (m_final,"C");
+addstrand (m_final,"D");
+addstrand (m_final,"E");
+addstrand (m_final,"F");
+addstrand (m_final,"G");
+addstrand (m_final,"H");
+addstrand (m_final,"I");
+addstrand (m_final,"J");
+addstrand (m_final,"K");
+addstrand (m_final,"L");
+addstrand (m_final,"M");
+addstrand (m_final,"N");
+addstrand (m_final,"O");
+addstrand (m_final,"P");
+addstrand (m_final,"Q");
+addstrand (m_final,"R");
+addstrand (m_final,"My");
+addstrand (m_final,"Ny");
+addstrand (m_final,"Oy");
+addstrand (m_final,"Py");
+addstrand (m_final,"Qy");
+addstrand (m_final,"Ry");
+
+
+
+m1=newmolecule();
+addstrand (m1,"A");
+
+
+for (i=1;i<=56;i=i+1)	{
+trise  = (i)*rise;
+ttwist = (i)*twist;
+
+s="g";
+n=NULL;
+
+mat_drz= newtransform (0.,0.,trise,0.,0.,ttwist);
+
+printf("%s %s\n",s,n);
+if (i==1)	{
+		m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+		}
+else if (i==56){
+		m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+		}
+else		{
+		m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+		}
+
+transformmol(mat_drz,m,NULL);
+mergestr(m1,"A","first",m,"anti","last");
+freemolecule (m);
+n=NULL;
+s="g";
+			}
+
+m_temp=copymolecule (m1);
+mat_x  = newtransform (disp,0.,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+//putpdb ("dna1.pdb",m_temp);
+mergestr(m_final,"S","last",m_temp,"A","first");
+
+m_temp=copymolecule (m1);
+mat_x  = newtransform (3*disp,0.,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+//putpdb ("dna3.pdb",m_temp);
+mergestr(m_final,"B","last",m_temp,"A","first");
+
+m_temp=copymolecule (m1);
+mat_x  = newtransform (5*disp,0.,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+mergestr(m_final,"C","last",m_temp,"A","first");
+//putpdb ("dna5.pdb",m_temp);
+
+freemolecule (m_temp);
+freemolecule (m1);
+m1=newmolecule();
+addstrand (m1,"A");
+n=NULL;
+s="g";
+
+for (i=1;i<=56;i=i+1)   {
+trise  = (i)*rise;
+ttwist = (i)*twist;
+
+s="g";
+n=NULL;
+mat_drz= newtransform (0.,0.,trise,0.,0.,ttwist);
+
+
+printf("%s %s\n",s,n);
+if (i==1)       {
+                m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+                }
+else if (i==56){
+                m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+                }
+else            {
+                m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+                }
+
+transformmol(mat_drz,m,NULL);
+mergestr(m1,"A","last",m,"sense","first");
+freemolecule (m);
+n=NULL;
+s="g";
+                        }
+m_temp=copymolecule (m1);
+mat_x  = newtransform (0.,0.,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+//putpdb ("dna2.pdb",m_temp);
+mergestr(m_final,"D","last",m_temp,"A","first");
+
+m_temp=copymolecule (m1);
+mat_x  = newtransform (2*disp,0.0,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+//putpdb ("dna4.pdb",m_temp);
+mergestr(m_final,"E","last",m_temp,"A","first");
+
+m_temp=copymolecule (m1);
+mat_x  = newtransform (4*disp,0.,0.,0.,0.,re_arr*twist);
+transformmol(mat_x,m_temp,NULL);
+//putpdb ("dna6.pdb",m_temp);
+mergestr(m_final,"F","last",m_temp,"A","first");
+//putpdb ("6h.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(57-i)*rise;
+	t = (57-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(0.,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+	else		{
+	trise= (42+i)*rise;		
+	t=(42+i);
+	ttwist=t*twist;
+	mat_x   =newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+						}
+				else 		{
+						 m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"sense","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd1.pdb",m1);
+mergestr(m_final,"G","last",m1,"A","first");
+//putpdb("6h1.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(57-i)*rise;
+	t = (57-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+	else		{
+	trise= (42+i)*rise;		
+	t=(42+i);
+	ttwist=t*twist;
+	mat_x   =newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+						}
+				else 		{
+						 m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"sense","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd2.pdb",m1);
+mergestr(m_final,"H","last",m1,"A","first");
+//putpdb("6h2.pdb",m_final);
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(57-i)*rise;
+	t = (57-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+	else		{
+	trise= (42+i)*rise;		
+	t=(42+i);
+	ttwist=t*twist;
+	mat_x   =newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+						}
+				else 		{
+						 m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"sense","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd3.pdb",m1);
+mergestr(m_final,"I","last",m1,"A","first");
+//putpdb("6h3.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(i)*rise;
+	t = (i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else		{
+	trise= (15-i)*rise;		
+	t=(15-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(0.0,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd4.pdb",m1);
+mergestr(m_final,"J","last",m1,"A","first");
+//putpdb("6h4.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(i)*rise;
+	t = (i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else		{
+	trise= (15-i)*rise;		
+	t=(15-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd5.pdb",m1);
+mergestr(m_final,"K","last",m1,"A","first");
+//putpdb("6h5.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=14;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(i)*rise;
+	t = (i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else		{
+	trise= (15-i)*rise;		
+	t=(15-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==14)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd6.pdb",m1);
+mergestr(m_final,"L","last",m1,"A","first");
+//putpdb("6h6.pdb",m_final);
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=25;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=14)	{
+	trise =(22-i)*rise;
+	t = (22-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(0.,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>14 && i<=21 ) 			{
+	trise =(i-7)*rise;
+	t = (i-7);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (36-i)*rise;		
+	t=(36-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==25)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd7.pdb",m1);
+mergestr(m_final,"M","last",m1,"A","first");
+//putpdb("6h7.pdb",m_final);
+
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=25;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=14)	{
+	trise =(43-i)*rise;
+	t = (43-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(0.,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>14 && i<=21 ) 			{
+	trise =(i+14)*rise;
+	t = (i+14);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (57-i)*rise;		
+	t=(57-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==25)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd8.pdb",m1);
+mergestr(m_final,"N","last",m1,"A","first");
+//putpdb("6h8.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=28;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(22-i)*rise;
+	t = (22-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>7 && i<=21 ) 			{
+	trise =(i+7)*rise;
+	t = (i+7);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (50-i)*rise;		
+	t=(50-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(0.0,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==28)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd9.pdb",m1);
+mergestr(m_final,"O","last",m1,"A","first");
+//putpdb("6h9.pdb",m_final);
+
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=28;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(22-i)*rise;
+	t = (22-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>7 && i<=21 ) 			{
+	trise =(i+7)*rise;
+	t = (i+7);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (50-i)*rise;		
+	t=(50-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==28)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd10.pdb",m1);
+mergestr(m_final,"P","last",m1,"A","first");
+//putpdb("6h10.pdb",m_final);
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=28;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(43-i)*rise;
+	t = (43-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>7 && i<=21 ) 			{
+	trise =(i+28)*rise;
+	t = (i+28);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (71-i)*rise;		
+	t=(71-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(0.0,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==28)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd11.pdb",m1);
+mergestr(m_final,"R","last",m1,"A","first");
+//putpdb("6h11.pdb",m_final);
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=28;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=7)	{
+	trise =(43-i)*rise;
+	t = (43-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>7 && i<=21 ) 			{
+	trise =(i+28)*rise;
+	t = (i+28);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+			
+	else		{
+	trise= (71-i)*rise;		
+	t=(71-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==28)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd12.pdb",m1);
+mergestr(m_final,"My","last",m1,"A","first");
+//putpdb("6h12.pdb",m_final);
+
+
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=24;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=3)	{
+	trise =(11-i)*rise;
+	t = (11-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>3 && i<=10 ) 			{
+	trise =(i+4)*rise;
+	t = (i+4);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==8)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else if	(i>10 && i<=17 ) 			{
+	trise =(25-i)*rise;
+	t = (25-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}			
+	else		{
+	trise= (i-10)*rise;		
+	t=(i-10);
+	ttwist=t*twist;
+	mat_x   =newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==24)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+						}
+				else 		{
+						 m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"sense","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd13.pdb",m1);
+mergestr(m_final,"Ny","last",m1,"A","first");
+//putpdb("6h13.pdb",m_final);
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=24;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=3)	{
+	trise =(32-i)*rise;
+	t = (32-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(2*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a5");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}
+
+	else if	(i>3 && i<=10 ) 			{
+	trise =(i+25)*rise;
+	t = (i+25);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(3*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==8)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else if	(i>10 && i<=17 ) 			{
+	trise =(46-i)*rise;
+	t = (46-i);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==15)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}	
+				else		{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"anti","first");
+			}			
+	else		{
+	trise= (i+11)*rise;		
+	t=(i+11);
+	ttwist=t*twist;
+	mat_x   =newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==24)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s3");
+						}
+				else 		{
+						 m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			            transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"sense","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}				
+//putpdb ("ssd14.pdb",m1);
+mergestr(m_final,"Oy","last",m1,"A","first");
+//putpdb("6h14.pdb",m_final);
+
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=21;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=14)	{
+	trise =(i+14)*rise;
+	t = (i+14);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else		{
+	trise= (43-i)*rise;		
+	t=(43-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==21)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd15.pdb",m1);
+mergestr(m_final,"Py","last",m1,"A","first");
+//putpdb("6h15.pdb",m_final);
+
+
+
+
+
+
+
+
+freemolecule(m1);
+m1= newmolecule ();
+addstrand (m1,"A");
+for (i=1;i<=21;i=i+1) 	{
+	
+	n=NULL;
+	s="c";
+	if (i<=14)	{
+	trise =(i+35)*rise;
+	t = (i+35);
+	ttwist=t*twist;
+	
+	mat_x  = newtransform(5*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz= newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==1)	{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"s5");
+						}	
+				else		{
+						m=wc_helix(s,"","dna",n,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+			transformmol(mat_x,m,NULL);
+			mergestr(m1,"A","last",m,"sense","first");
+			}
+	else		{
+	trise= (64-i)*rise;		
+	t=(64-i);
+	ttwist=t*twist;
+	mat_x   =newtransform(4*disp,0.,0.,0.,0.,re_arr*twist);
+	mat_drz =newtransform(0.,0.,trise,0.,0.,ttwist);
+				if (i==21)	{
+						m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"a3");
+						}
+				else 		{
+						 m=wc_helix(n,"","dna",s,"","dna",2.25,-4.96,0.,0.,"");
+						}
+			transformmol(mat_drz,m,NULL);
+                        transformmol(mat_x,m,NULL);
+                        mergestr(m1,"A","last",m,"anti","first");
+
+				}
+			freemolecule(m);
+			n=NULL;
+			s="c";
+			printf("%s %s %d %d %lf\n",s,n,i,t,ttwist);
+						}
+//putpdb ("ssd16.pdb",m1);
+mergestr(m_final,"Qy","last",m1,"A","first");
+//putpdb("6h16.pdb",m_final);
+
+putpdb ("dna_sheet_exp.pdb",m_final);
