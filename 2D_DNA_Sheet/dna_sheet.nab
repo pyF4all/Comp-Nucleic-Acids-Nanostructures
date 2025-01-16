@@ -10,7 +10,6 @@ float re_arr,disp;
 re_arr=0.0;
 disp=20.00;
 
-
 m_final=newmolecule();
 addstrand (m_final,"S");
 addstrand (m_final,"B");
