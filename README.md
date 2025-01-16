@@ -1,7 +1,7 @@
 
 # Nucleic Acid Nanostructures
 <p align="center">
-  <img src="logo.jpg" width="416" alt=" "/>
+  <img src="logo.jpg" width="300" alt=" "/>
 </p>
 
 
