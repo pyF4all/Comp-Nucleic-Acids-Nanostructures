@@ -33,7 +33,7 @@ The script defines the following:
 
 ## Citing This Work
 If you are using this code, consider citing these articles:
-- S. Naskar, M. Gosika, H. Joshi, P. K. Maiti; "Tuning the Stability of DNA Nanotubes with Salt", *Journal of Physical Chemistry C*, 2019, **123**(14), 9461-9470. 
-- S. Naskar, H. Joshi, B. Chakraborty, N. C. Seeman, P. K. Maiti; "Atomic Structures of RNA nanotubes and comparison with DNA nanotubes", *Nanoscale*, 2019, **11**(31), 14863-14878. 
-- S. Naskar, P. K. Maiti; "Mechanical properties of DNA and DNA nanostructures: comparison of atomistic, Martini, and oxDNA", *Journal of Materials Chemistry B*, 2021, **9**(25), 5102-5113.
+- "Tuning the Stability of DNA Nanotubes with Salt", *Journal of Physical Chemistry C*, 2019, **123**(14), 9461-9470. 
+- "Atomic Structures of RNA nanotubes and comparison with DNA nanotubes", *Nanoscale*, 2019, **11**(31), 14863-14878. 
+- "Mechanical properties of DNA and DNA nanostructures: comparison of atomistic, Martini, and oxDNA", *Journal of Materials Chemistry B*, 2021, **9**(25), 5102-5113.
 
